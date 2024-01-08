@@ -1,0 +1,13 @@
+name: CustomsTags
+main: CustomsTags.CustomsTagsPlugin
+author: CustomEnchants
+version: ${project.version}
+api-version: 1.13
+softdepend:
+  - PlaceholderAPI
+commands:
+  CustomsTags:
+    description: Main customs tags command
+  tags:
+    description: Main command to open the tags menu
+    aliases: [etags,tagsmenu,etagsmenu]
