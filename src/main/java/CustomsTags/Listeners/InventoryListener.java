@@ -30,7 +30,7 @@ public class InventoryListener implements Listener {
             return;
         }
         Optional<Tag> tagOptional = instance.getTags().stream().filter(tag -> event.getCurrentItem().isSimilar(tag.getUnlockedItemStack()) || event.getCurrentItem().isSimilar(tag.getLockedItemStack())).findFirst();
-        if(!tagOptional.isPresent()){
+        if (!tagOptional.isPresent()) {
             return;
         }
         if (!player.hasPermission(tagOptional.get().getPermission())) return;

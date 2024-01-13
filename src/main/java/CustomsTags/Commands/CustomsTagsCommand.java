@@ -20,24 +20,24 @@ public class CustomsTagsCommand implements CommandExecutor, TabCompleter {
     private final CustomsTagsPlugin instance = CustomsTagsPlugin.getInstance();
     private final ArrayList<SubCommand> subCommands = new ArrayList<>();
 
-    public CustomsTagsCommand(){
+    public CustomsTagsCommand() {
         subCommands.add(new Reload());
     }
 
-    private String fixColour(String input){
-        return ChatColor.translateAlternateColorCodes('&',input);
+    private String fixColour(String input) {
+        return ChatColor.translateAlternateColorCodes('&', input);
     }
 
     @Override
     public boolean onCommand(CommandSender cs, Command cmd, String s, String[] args) {
-        if(cmd.getName().equalsIgnoreCase("CustomsTags")){
+        if (cmd.getName().equalsIgnoreCase("CustomsTags")) {
             if (args.length == 0) {
                 sendHelp(cs, cmd, 1);
                 return false;
             }
             if (args[0].equalsIgnoreCase("help")) {
                 int page = 1;
-                if(args.length >= 2) {
+                if (args.length >= 2) {
                     try {
                         page = Integer.parseInt(args[1]);
                     } catch (NumberFormatException ignored) {
@@ -49,9 +49,9 @@ public class CustomsTagsCommand implements CommandExecutor, TabCompleter {
             ArrayList<String> a = new ArrayList<>(Arrays.asList(args));
             a.remove(0);
             Optional<SubCommand> subCommandOptional = subCommands.stream().filter(subCommand -> subCommand.getName().equalsIgnoreCase(args[0])).findFirst();
-            if(!subCommandOptional.isPresent()){
+            if (!subCommandOptional.isPresent()) {
                 sendHelp(cs, cmd, 1);
-            }else{
+            } else {
                 subCommandOptional.get().run(cs, a.toArray(new String[0]));
             }
             return false;
@@ -59,12 +59,12 @@ public class CustomsTagsCommand implements CommandExecutor, TabCompleter {
         return false;
     }
 
-    private void sendHelp(CommandSender cs, Command cmd,int page) {
+    private void sendHelp(CommandSender cs, Command cmd, int page) {
         new BukkitRunnable() {
             public void run() {
                 cs.sendMessage(instance.getUtil().fixColour("&6____________.[ &2CustomsTags Help Page &c%page% &6].____________".replace("%page%", "" + page)));
                 int perPage = 11;
-                int maxPage = subCommands.size() == 0 ? 1 : Math.max((int) Math.ceil((double) subCommands.size() / perPage), 1);
+                int maxPage = subCommands.isEmpty() ? 1 : Math.max((int) Math.ceil((double) subCommands.size() / perPage), 1);
                 int actualPage = Math.min(page, maxPage);
                 int min = actualPage == 1 ? 0 : actualPage * perPage - perPage;
                 int max = actualPage == 1 ? perPage : min + perPage;

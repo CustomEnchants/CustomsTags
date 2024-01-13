@@ -124,8 +124,8 @@ abstract class Database {
         try {
             PreparedStatement ps = connection.prepareStatement("INSERT OR IGNORE INTO Tags (Registered, MCUUID, Tag) VALUES (?, ?, ?);");
             ps.setInt(1, 1);
-            ps.setString(2,uuid);
-            ps.setString(3,tag);
+            ps.setString(2, uuid);
+            ps.setString(3, tag);
             ps.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e.getMessage());

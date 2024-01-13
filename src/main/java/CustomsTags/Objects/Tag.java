@@ -14,7 +14,7 @@ public class Tag {
     private final int inventorySlot;
     private final int page;
 
-    public Tag(String name, String chat, String permission, ItemStack locked, ItemStack unlocked, int inventorySlot,int page) {
+    public Tag(String name, String chat, String permission, ItemStack locked, ItemStack unlocked, int inventorySlot, int page) {
         this.name = name;
         this.chat = chat;
         this.permission = permission;
@@ -28,11 +28,11 @@ public class Tag {
         return p.hasPermission(getPermission()) ? getUnlockedItemStack() : getLockedItemStack();
     }
 
-    public ItemStack getUnlockedItemStack(){
+    public ItemStack getUnlockedItemStack() {
         return unlocked;
     }
 
-    public ItemStack getLockedItemStack(){
+    public ItemStack getLockedItemStack() {
         return locked;
     }
 
@@ -40,11 +40,11 @@ public class Tag {
         return permission;
     }
 
-    public int getInventorySlot(){
+    public int getInventorySlot() {
         return inventorySlot;
     }
 
-    public int getPage(){
+    public int getPage() {
         return page;
     }
 

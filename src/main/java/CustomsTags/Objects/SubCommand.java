@@ -3,7 +3,6 @@ package CustomsTags.Objects;
 import CustomsTags.CustomsTagsPlugin;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
 
 public abstract class SubCommand {
 
@@ -43,7 +42,7 @@ public abstract class SubCommand {
         return ChatColor.translateAlternateColorCodes('&', input);
     }
 
-    public boolean hasAccess(CommandSender cs){
+    public boolean hasAccess(CommandSender cs) {
         return getPermission().isEmpty() || cs.hasPermission(getPermission());
     }
 

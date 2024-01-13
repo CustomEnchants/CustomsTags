@@ -6,7 +6,7 @@ import org.bukkit.command.CommandSender;
 public class Reload extends SubCommand {
 
     public Reload() {
-        super("Reload", "Reload the configuration","", "CustomsTags.reload");
+        super("Reload", "Reload the configuration", "", "CustomsTags.reload");
     }
 
     @Override
@@ -17,7 +17,7 @@ public class Reload extends SubCommand {
         }
         instance.getFileUtil().reload_tags_reloading.forEach(cs::sendMessage);
         instance.getTags().clear();
-        instance.getFileUtil().loadTags();
+        instance.getFileUtil().loadValues(true);
         instance.getFileUtil().reload_tags_reloaded.forEach(cs::sendMessage);
     }
 }

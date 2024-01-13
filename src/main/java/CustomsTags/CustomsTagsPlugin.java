@@ -24,7 +24,7 @@ public class CustomsTagsPlugin extends JavaPlugin {
     private FileUtil fileutil;
     private Util util;
 
-    private final HashMap<UUID,User> users = new HashMap<>();
+    private final HashMap<UUID, User> users = new HashMap<>();
 
     public static CustomsTagsPlugin getInstance() {
         return instance;
@@ -40,8 +40,8 @@ public class CustomsTagsPlugin extends JavaPlugin {
         getCommand("CustomsTags").setExecutor(new CustomsTagsCommand());
         getCommand("CustomsTags").setTabCompleter(new CustomsTagsPlugin());
         getCommand("tags").setExecutor(new Tags());
-        new BukkitRunnable(){
-            public void run(){
+        new BukkitRunnable() {
+            public void run() {
                 Bukkit.getServer().getOnlinePlayers().forEach(player -> {
                     User user = new User(player.getUniqueId());
                     user.register();
@@ -66,7 +66,7 @@ public class CustomsTagsPlugin extends JavaPlugin {
         return fileutil;
     }
 
-    public HashMap<UUID,User> getUsers(){
+    public HashMap<UUID, User> getUsers() {
         return users;
     }
 
@@ -74,7 +74,7 @@ public class CustomsTagsPlugin extends JavaPlugin {
         return tags;
     }
 
-    public Util getUtil(){
+    public Util getUtil() {
         return util;
     }
 

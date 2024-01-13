@@ -16,26 +16,26 @@ public class PlayerListener implements Listener {
 
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
-        new BukkitRunnable(){
-            public void run(){
+        new BukkitRunnable() {
+            public void run() {
                 User user = new User(event.getPlayer().getUniqueId());
                 user.register();
                 user.load();
-                instance.getUsers().put(event.getPlayer().getUniqueId(),user);
+                instance.getUsers().put(event.getPlayer().getUniqueId(), user);
                 cancel();
             }
         }.runTaskAsynchronously(instance);
     }
 
     @EventHandler
-    public void onDisconnect(PlayerQuitEvent event){
-        if(!instance.getUsers().containsKey(event.getPlayer().getUniqueId())) return;
+    public void onDisconnect(PlayerQuitEvent event) {
+        if (!instance.getUsers().containsKey(event.getPlayer().getUniqueId())) return;
         instance.getUsers().remove(event.getPlayer().getUniqueId());
     }
 
     @EventHandler
-    public void onKick(PlayerKickEvent event){
-        if(!instance.getUsers().containsKey(event.getPlayer().getUniqueId())) return;
+    public void onKick(PlayerKickEvent event) {
+        if (!instance.getUsers().containsKey(event.getPlayer().getUniqueId())) return;
         instance.getUsers().remove(event.getPlayer().getUniqueId());
     }
 
