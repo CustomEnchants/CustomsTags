@@ -114,7 +114,10 @@ public class FileUtil {
         }
     }
 
-    public void loadValues() {
+    public void loadValues(boolean reload) {
+        if(reload){
+            instance.getTags().clear();
+        }
         FileConfiguration config = YamlConfiguration.loadConfiguration(conf);
         inventoryName = fixColour(config.getString("inventory.name"));
         inventorySize = config.getInt("inventory.size");
@@ -196,7 +199,7 @@ public class FileUtil {
                 Bukkit.getLogger().log(Level.SEVERE, e.getMessage());
             }
         }
-        loadValues();
+        loadValues(false);
         loadTags();
         loadDataBase();
     }
