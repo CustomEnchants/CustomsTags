@@ -205,7 +205,7 @@ public class FileUtil {
     }
 
     private ItemStack createTagItem(String tagName, String chat, boolean locked) {
-        ItemStack itemStack = locked ? new ItemStack(Material.STAINED_GLASS_PANE, 1, (short) 15) : new ItemStack(Material.NAME_TAG);
+        ItemStack itemStack = locked ? getFiller() : new ItemStack(Material.NAME_TAG);
         ItemMeta itemMeta = itemStack.getItemMeta();
         itemMeta.setDisplayName(fixColour("&b&n" + tagName));
         ArrayList<String> newLore = new ArrayList<>();
@@ -230,7 +230,7 @@ public class FileUtil {
     }
 
     private ItemStack getRemoveTagItem() {
-        ItemStack itemStack = new ItemStack(Material.CAULDRON_ITEM);
+        ItemStack itemStack = new ItemStack(Material.getMaterial("CAULDRON_ITEM") != null ? Material.getMaterial("CAULDRON_ITEM") : Material.getMaterial("CAULDRON"));
         ItemMeta itemMeta = itemStack.getItemMeta();
         itemMeta.setDisplayName(fixColour("&c&l&nRemove Tag"));
         itemMeta.setLore(fixColours(Arrays.asList("&8&l&m-------------------------------", "&bClick this to deactivate your tag", "&8&l&m-------------------------------")));
@@ -238,8 +238,12 @@ public class FileUtil {
         return itemStack;
     }
 
+    private ItemStack getFiller(){
+        return Material.getMaterial("BLACK_STAINED_GLASS_PANE") != null ? new ItemStack(Material.getMaterial("BLACK_STAINED_GLASS_PANE")) : new ItemStack(Material.getMaterial("STAINED_GLASS_PANE"), 1, (short) 15);
+    }
+
     private ItemStack getDefaultPlaceHolderItem() {
-        ItemStack itemStack = new ItemStack(Material.STAINED_GLASS_PANE, 1, (short) 15);
+        ItemStack itemStack = getFiller();
         ItemMeta itemMeta = itemStack.getItemMeta();
         itemMeta.setDisplayName(fixColour("&c"));
         itemStack.setItemMeta(itemMeta);

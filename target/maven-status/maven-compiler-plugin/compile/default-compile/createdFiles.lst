@@ -1,5 +1,5 @@
-CustomsTags\Listeners\PlayerListener.class
 CustomsTags\Hooks\PlaceHolderAPIPlaceHolders.class
+CustomsTags\Listeners\PlayerListener.class
 CustomsTags\Objects\Tag.class
 CustomsTags\Commands\CustomsTagsCommand.class
 CustomsTags\MySQL\Database.class
@@ -7,11 +7,12 @@ CustomsTags\Listeners\PlayerListener$1.class
 CustomsTags\CustomsTagsPlugin$1.class
 CustomsTags\Utils\FileUtil.class
 CustomsTags\Commands\Tags.class
-CustomsTags\MySQL\SQLite.class
-CustomsTags\MySQL\MySQL.class
 CustomsTags\Listeners\InventoryListener.class
+CustomsTags\MySQL\MySQL.class
+CustomsTags\MySQL\SQLite.class
 CustomsTags\Objects\User.class
 CustomsTags\Commands\Sub\Reload.class
 CustomsTags\CustomsTagsPlugin.class
 CustomsTags\Utils\Util.class
 CustomsTags\Objects\SubCommand.class
+CustomsTags\Commands\CustomsTagsCommand$1.class

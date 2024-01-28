@@ -1,15 +1,15 @@
-G:\My Drive\Development - SourceCode\CustomsTags - 3.0.0\src\main\java\CustomsTags\Commands\Sub\Reload.java
-G:\My Drive\Development - SourceCode\CustomsTags - 3.0.0\src\main\java\CustomsTags\Objects\SubCommand.java
-G:\My Drive\Development - SourceCode\CustomsTags - 3.0.0\src\main\java\CustomsTags\Commands\CustomsTagsCommand.java
-G:\My Drive\Development - SourceCode\CustomsTags - 3.0.0\src\main\java\CustomsTags\CustomsTagsPlugin.java
-G:\My Drive\Development - SourceCode\CustomsTags - 3.0.0\src\main\java\CustomsTags\MySQL\Database.java
-G:\My Drive\Development - SourceCode\CustomsTags - 3.0.0\src\main\java\CustomsTags\Objects\Tag.java
-G:\My Drive\Development - SourceCode\CustomsTags - 3.0.0\src\main\java\CustomsTags\Listeners\PlayerListener.java
-G:\My Drive\Development - SourceCode\CustomsTags - 3.0.0\src\main\java\CustomsTags\Utils\FileUtil.java
-G:\My Drive\Development - SourceCode\CustomsTags - 3.0.0\src\main\java\CustomsTags\MySQL\MySQL.java
-G:\My Drive\Development - SourceCode\CustomsTags - 3.0.0\src\main\java\CustomsTags\MySQL\SQLite.java
-G:\My Drive\Development - SourceCode\CustomsTags - 3.0.0\src\main\java\CustomsTags\Commands\Tags.java
-G:\My Drive\Development - SourceCode\CustomsTags - 3.0.0\src\main\java\CustomsTags\Utils\Util.java
-G:\My Drive\Development - SourceCode\CustomsTags - 3.0.0\src\main\java\CustomsTags\Objects\User.java
-G:\My Drive\Development - SourceCode\CustomsTags - 3.0.0\src\main\java\CustomsTags\Hooks\PlaceHolderAPIPlaceHolders.java
-G:\My Drive\Development - SourceCode\CustomsTags - 3.0.0\src\main\java\CustomsTags\Listeners\InventoryListener.java
+C:\Users\Brian\Documents\CustomsTags\src\main\java\CustomsTags\Utils\FileUtil.java
+C:\Users\Brian\Documents\CustomsTags\src\main\java\CustomsTags\Commands\CustomsTagsCommand.java
+C:\Users\Brian\Documents\CustomsTags\src\main\java\CustomsTags\Hooks\PlaceHolderAPIPlaceHolders.java
+C:\Users\Brian\Documents\CustomsTags\src\main\java\CustomsTags\Listeners\InventoryListener.java
+C:\Users\Brian\Documents\CustomsTags\src\main\java\CustomsTags\MySQL\Database.java
+C:\Users\Brian\Documents\CustomsTags\src\main\java\CustomsTags\CustomsTagsPlugin.java
+C:\Users\Brian\Documents\CustomsTags\src\main\java\CustomsTags\Objects\Tag.java
+C:\Users\Brian\Documents\CustomsTags\src\main\java\CustomsTags\Utils\Util.java
+C:\Users\Brian\Documents\CustomsTags\src\main\java\CustomsTags\Commands\Sub\Reload.java
+C:\Users\Brian\Documents\CustomsTags\src\main\java\CustomsTags\Objects\SubCommand.java
+C:\Users\Brian\Documents\CustomsTags\src\main\java\CustomsTags\Objects\User.java
+C:\Users\Brian\Documents\CustomsTags\src\main\java\CustomsTags\Commands\Tags.java
+C:\Users\Brian\Documents\CustomsTags\src\main\java\CustomsTags\MySQL\MySQL.java
+C:\Users\Brian\Documents\CustomsTags\src\main\java\CustomsTags\Listeners\PlayerListener.java
+C:\Users\Brian\Documents\CustomsTags\src\main\java\CustomsTags\MySQL\SQLite.java

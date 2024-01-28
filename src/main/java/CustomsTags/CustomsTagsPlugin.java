@@ -38,7 +38,7 @@ public class CustomsTagsPlugin extends JavaPlugin {
         Bukkit.getServer().getPluginManager().registerEvents(new InventoryListener(), this);
         Bukkit.getServer().getPluginManager().registerEvents(new PlayerListener(), this);
         getCommand("CustomsTags").setExecutor(new CustomsTagsCommand());
-        getCommand("CustomsTags").setTabCompleter(new CustomsTagsPlugin());
+        getCommand("CustomsTags").setTabCompleter(new CustomsTagsCommand());
         getCommand("tags").setExecutor(new Tags());
         new BukkitRunnable() {
             public void run() {

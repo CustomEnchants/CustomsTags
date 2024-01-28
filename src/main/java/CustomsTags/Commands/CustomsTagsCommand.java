@@ -24,10 +24,6 @@ public class CustomsTagsCommand implements CommandExecutor, TabCompleter {
         subCommands.add(new Reload());
     }
 
-    private String fixColour(String input) {
-        return ChatColor.translateAlternateColorCodes('&', input);
-    }
-
     @Override
     public boolean onCommand(CommandSender cs, Command cmd, String s, String[] args) {
         if (cmd.getName().equalsIgnoreCase("CustomsTags")) {
