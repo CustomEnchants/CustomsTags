@@ -1,7 +1,7 @@
 name: CustomsTags
 main: CustomsTags.CustomsTagsPlugin
 author: CustomEnchants
-version: 3.3.0
+version: 3.4.0
 api-version: 1.13
 softdepend:
   - PlaceholderAPI

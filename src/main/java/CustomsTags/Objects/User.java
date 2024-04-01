@@ -10,6 +10,7 @@ public class User {
 
     private final UUID uuid;
     private String activeTag;
+    private int selectedPage;
 
     public User(UUID uuid) {
         this.uuid = uuid;
@@ -29,6 +30,14 @@ public class User {
 
     public String getActiveTag() {
         return activeTag;
+    }
+
+    public void setSelectedPage(int page){
+        this.selectedPage = page;
+    }
+
+    public int getSelectedPage(){
+        return selectedPage;
     }
 
 }

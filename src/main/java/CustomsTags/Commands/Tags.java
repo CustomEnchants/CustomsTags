@@ -28,22 +28,20 @@ public class Tags implements CommandExecutor {
                 } catch (NumberFormatException ignored) {
                 }
             }
+            if(page < 1){
+                page = 1;
+            }
             int finalPage = page;
             Player player = (Player) cs;
             User user = instance.getUsers().get(player.getUniqueId());
-            Inventory inventory = Bukkit.createInventory(player, instance.getFileUtil().inventorySize, instance.getFileUtil().inventoryName);
-            instance.getTags().stream().filter(tag -> tag.getPage() == finalPage).forEach(tag -> inventory.setItem(tag.getInventorySlot(), tag.getItemStack(player)));
-            ItemStack infoItem = instance.getUtil().getInfoItem(user);
-            ItemStack removeTagItem = instance.getUtil().getRemoveTagItem(user);
-            ItemStack placeHolderItem = instance.getUtil().getPlaceHolderItem(user);
-            instance.getFileUtil().infoItemSlots.forEach(slot -> inventory.setItem(slot, infoItem));
-            instance.getFileUtil().removeTagItemSlots.forEach(slot -> inventory.setItem(slot, removeTagItem));
-            instance.getFileUtil().placeholderItemSlots.forEach(slot -> inventory.setItem(slot, placeHolderItem));
-            player.openInventory(inventory);
+            user.setSelectedPage(finalPage);
+            player.openInventory(instance.getUtil().generateInventory(player,user,finalPage));
             return false;
         }
         return false;
     }
+
+
 
 
 }

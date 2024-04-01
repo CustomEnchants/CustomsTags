@@ -6,6 +6,7 @@ import CustomsTags.Objects.Tag;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.SkullType;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -15,10 +16,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.util.logging.Level;
 
 public class FileUtil {
@@ -47,6 +45,13 @@ public class FileUtil {
     public ItemStack placeHolderItem;
     public ItemStack removeTagItem;
 
+
+    public ItemStack nextPageItem;
+    public int nextPageItemSlot;
+    public ItemStack previousPageItem;
+    public int previousPageItemSlot;
+
+
     private final CustomsTagsPlugin instance = CustomsTagsPlugin.getInstance();
 
     public String fixColour(String input) {
@@ -66,7 +71,7 @@ public class FileUtil {
             try {
                 db.createNewFile();
             } catch (IOException e) {
-                Bukkit.getLogger().log(Level.SEVERE, e.getMessage());
+                Bukkit.getServer().getLogger().log(Level.SEVERE, e.getMessage());
                 return;
             }
         }
@@ -75,10 +80,10 @@ public class FileUtil {
             database.openConnection();
             database.setupDataTable();
         } catch (ClassNotFoundException | SQLException e) {
-            Bukkit.getLogger().log(Level.SEVERE, e.getMessage());
+            Bukkit.getServer().getLogger().log(Level.SEVERE, e.getMessage());
             return;
         }
-        Bukkit.getLogger().log(Level.FINE, "Successfully loaded SQLite database");
+        Bukkit.getServer().getLogger().log(Level.FINE, "Successfully loaded SQLite database");
     }
 
     public void saveTag(Tag tag) {
@@ -94,7 +99,7 @@ public class FileUtil {
         try {
             config.save(tags);
         } catch (Exception e) {
-            Bukkit.getLogger().log(Level.SEVERE, e.getMessage());
+            Bukkit.getServer().getLogger().log(Level.SEVERE, e.getMessage());
         }
     }
 
@@ -136,6 +141,11 @@ public class FileUtil {
         deactivated_tag = fixColours(config2.getStringList("Tag.Deactivated"));
         reload_tags_reloading = fixColours(config2.getStringList("Reload-Tags.Reloading"));
         reload_tags_reloaded = fixColours(config2.getStringList("Reload-Tags.Reloaded"));
+
+        nextPageItem = config.getItemStack("nextPageItem.item");
+        nextPageItemSlot = config.getInt("nextPageItem.slot");
+        previousPageItem = config.getItemStack("previousPageItem.item");
+        previousPageItemSlot = config.getInt("previousPageItem.slot");
     }
 
     public void setup(File dir) {
@@ -150,17 +160,23 @@ public class FileUtil {
             config.set("inventory.size", 54);
 
             config.set("placeHolderItem.item", getDefaultPlaceHolderItem());
-            config.set("placeHolderItem.itemSlots", Arrays.asList(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 17, 18, 26, 27, 35, 36, 44, 46, 47, 48, 50, 51, 52));
+            config.set("placeHolderItem.itemSlots", Arrays.asList(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 17, 18, 26, 27, 35, 36, 44, 47, 48, 50, 51));
 
             config.set("infoItem.itemSlots", Collections.singletonList(49));
             config.set("infoItem.item", getDefaultInfoItem());
 
             config.set("removeTagItem.item", getRemoveTagItem());
-            config.set("removeTagItem.itemSlots", Arrays.asList(45, 53));
+            config.set("removeTagItem.itemSlots", Arrays.asList(46, 52));
+
+            config.set("previousPageItem.item",getPreviousPageItem());
+            config.set("previousPageItem.slot",45);
+
+            config.set("nextPageItem.item",getNextPageItem());
+            config.set("nextPageItem.slot",53);
             try {
                 config.save(conf);
             } catch (Exception e) {
-                System.out.println(e.getLocalizedMessage());
+                Bukkit.getServer().getLogger().log(Level.SEVERE, e.getMessage());
             }
         }
         tags = new File(dir + File.separator + "Tags.yml");
@@ -249,4 +265,42 @@ public class FileUtil {
         itemStack.setItemMeta(itemMeta);
         return itemStack;
     }
+
+    public ItemStack getNextPageItem(){
+        String value = "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMTliZjMyOTJlMTI2YTEwNWI1NGViYTcxM2FhMWIxNTJkNTQxYTFkODkzODgyOWM1NjM2NGQxNzhlZDIyYmYifX19";
+        Optional<Material> materialOptional = getSkullItem();
+        ItemStack itemStack = new ItemStack(new ItemStack(Material.AIR));
+        if(materialOptional.isPresent()) {
+            itemStack = materialOptional.get().name().equalsIgnoreCase("SKULL_ITEM") ? new ItemStack(materialOptional.get(), 1, (short) SkullType.PLAYER.ordinal()) : new ItemStack(materialOptional.get());
+        }
+        UUID hashAsId = new UUID(value.hashCode(), value.hashCode());
+        ItemStack result = Bukkit.getUnsafe().modifyItemStack(itemStack,"{SkullOwner:{Id:\"" + hashAsId + "\",Properties:{textures:[{Value:\"" + value + "\"}]}}}");
+        ItemMeta itemMeta = result.getItemMeta();
+        itemMeta.setDisplayName(fixColour("&cNext Page"));
+        result.setItemMeta(itemMeta);
+        itemStack = result;
+        return itemStack;
+    }
+
+    public Optional<Material> getSkullItem(){
+        return Arrays.stream(Material.values()).filter(material -> material.name().equalsIgnoreCase("SKULL_ITEM") || material.name().equalsIgnoreCase("PLAYER_HEAD")).findFirst();
+    }
+
+    public ItemStack getPreviousPageItem(){
+        String value = "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYmQ2OWUwNmU1ZGFkZmQ4NGU1ZjNkMWMyMTA2M2YyNTUzYjJmYTk0NWVlMWQ0ZDcxNTJmZGM1NDI1YmMxMmE5In19fQ==";
+        Optional<Material> materialOptional = getSkullItem();
+        ItemStack itemStack = new ItemStack(new ItemStack(Material.AIR));
+        if(materialOptional.isPresent()) {
+            itemStack = materialOptional.get().name().equalsIgnoreCase("SKULL_ITEM") ? new ItemStack(materialOptional.get(), 1, (short) SkullType.PLAYER.ordinal()) : new ItemStack(materialOptional.get());
+        }
+        UUID hashAsId = new UUID(value.hashCode(), value.hashCode());
+        ItemStack result = Bukkit.getUnsafe().modifyItemStack(itemStack,"{SkullOwner:{Id:\"" + hashAsId + "\",Properties:{textures:[{Value:\"" + value + "\"}]}}}");
+        ItemMeta itemMeta = result.getItemMeta();
+        itemMeta.setDisplayName(fixColour("&cPrevious Page"));
+        result.setItemMeta(itemMeta);
+        itemStack = result;
+        return itemStack;
+    }
+
+    //
 }

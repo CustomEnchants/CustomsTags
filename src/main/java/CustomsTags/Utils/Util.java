@@ -2,7 +2,10 @@ package CustomsTags.Utils;
 
 import CustomsTags.CustomsTagsPlugin;
 import CustomsTags.Objects.User;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -12,6 +15,20 @@ public class Util {
 
     public String fixColour(String input) {
         return ChatColor.translateAlternateColorCodes('&', input);
+    }
+
+    public Inventory generateInventory(Player player, User user, int page){
+        Inventory inventory = Bukkit.createInventory(player, instance.getFileUtil().inventorySize, instance.getFileUtil().inventoryName);
+        instance.getTags().stream().filter(tag -> tag.getPage() == page).forEach(tag -> inventory.setItem(tag.getInventorySlot(), tag.getItemStack(player)));
+        ItemStack infoItem = instance.getUtil().getInfoItem(user);
+        ItemStack removeTagItem = instance.getUtil().getRemoveTagItem(user);
+        ItemStack placeHolderItem = instance.getUtil().getPlaceHolderItem(user);
+        instance.getFileUtil().infoItemSlots.forEach(slot -> inventory.setItem(slot, infoItem));
+        instance.getFileUtil().removeTagItemSlots.forEach(slot -> inventory.setItem(slot, removeTagItem));
+        instance.getFileUtil().placeholderItemSlots.forEach(slot -> inventory.setItem(slot, placeHolderItem));
+        inventory.setItem(instance.getFileUtil().nextPageItemSlot,instance.getFileUtil().getNextPageItem());
+        inventory.setItem(instance.getFileUtil().previousPageItemSlot,instance.getFileUtil().getPreviousPageItem());
+        return inventory;
     }
 
     private final CustomsTagsPlugin instance = CustomsTagsPlugin.getInstance();

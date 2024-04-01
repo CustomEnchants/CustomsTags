@@ -2,6 +2,7 @@ package CustomsTags.Listeners;
 
 import CustomsTags.CustomsTagsPlugin;
 import CustomsTags.Objects.Tag;
+import CustomsTags.Objects.User;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -22,6 +23,29 @@ public class InventoryListener implements Listener {
         if (!event.getView().getTitle().equalsIgnoreCase(instance.getFileUtil().inventoryName)) return;
         event.setCancelled(true);
         Player player = (Player) event.getWhoClicked();
+        if(event.getCurrentItem().isSimilar(instance.getFileUtil().nextPageItem)){
+            User user = instance.getUsers().get(player.getUniqueId());
+            int newPage = user.getSelectedPage() + 1;
+            if(instance.getTags().stream().noneMatch(tag -> tag.getPage() == newPage)){
+                return;
+            }
+            player.openInventory(instance.getUtil().generateInventory(player,user,newPage));
+            user.setSelectedPage(newPage);
+            return;
+        }
+        if(event.getCurrentItem().isSimilar(instance.getFileUtil().previousPageItem)){
+            User user = instance.getUsers().get(player.getUniqueId());
+            int newPage = user.getSelectedPage() - 1;
+            if(newPage < 1){
+                return;
+            }
+            if(instance.getTags().stream().noneMatch(tag -> tag.getPage() == newPage)){
+                return;
+            }
+            player.openInventory(instance.getUtil().generateInventory(player,user,newPage));
+            user.setSelectedPage(newPage);
+            return;
+        }
         if (event.getCurrentItem().isSimilar(instance.getFileUtil().removeTagItem)) {
             instance.getUsers().get(player.getUniqueId()).setActiveTag("");
             instance.getFileUtil().database.update(player.getUniqueId().toString(), "");
